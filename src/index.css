@@ -82,11 +82,9 @@ nav {
   border-radius: 50%;
   width: 530px;
   height: 530px;
-  border: solid 10px #e51515;
-  background: url(./assets/img/trueno.gif) no-repeat center center fixed;
-  background-color: #000;
-  background-size: 700px 700px;
-  background-position: center center;
+  border: solid 10px #fff;
+
+  background-color: #e51515;
 }
 /*video*/
 .video {
