@@ -11,7 +11,7 @@ const Navbar = () => {
           <img className="ico-navlink" src={homeIco} alt="" />
           <h4 className="text-navlink">Home</h4>
         </NavLink>
-        <NavLink className="btn-link" to="/pokemones">
+        <NavLink className="btn-link" end to="/pokemones">
           <img className="ico-navlink" src={characterIco} alt="" />
           <h4 className="text-navlink">Pokemones</h4>
         </NavLink>
