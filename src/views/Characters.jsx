@@ -9,40 +9,40 @@ const Characters = () => {
   const [specie, setSpecie] = useState(null)
   const { name } = useParams()
 
-  try {
-    useEffect(() => {
-      jsonData()
-    }, [name])
-  } catch (e) {
-    alert('Mensaje del Servidor: No se pudo establecer la conexión')
-  }
+  useEffect(() => {
+    jsonData()
+  }, [name])
 
   const jsonData = async () => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${name}`
-    const response = await fetch(url)
-    const data = await response.json()
-    setCharacter(data)
+    try {
+      const url = `https://pokeapi.co/api/v2/pokemon/${name}`
+      const response = await fetch(url)
+      const data = await response.json()
+      setCharacter(data)
+    } catch (e) {
+      alert('Mensaje del Servidor: No se pudo establecer la conexión')
+    }
   }
-  try {
-    useEffect(() => {
-      if (character) {
-        jsonSp()
-      }
-    }, [character])
-  } catch (e) {
-    alert('Mensaje del Servidor: No se pudo establecer la conexión')
-  }
+
+  useEffect(() => {
+    if (character) {
+      jsonSp()
+    }
+  }, [character])
 
   const jsonSp = async () => {
-    const url = `https://pokeapi.co/api/v2/pokemon-species/${character.id}`
-    const response = await fetch(url)
-    const data = await response.json()
-
-    setSpecie(
-      data.flavor_text_entries
-        .filter((y) => y.language.name === 'es')
-        .map((e) => e)
-    )
+    try {
+      const url = `https://pokeapi.co/api/v2/pokemon-species/${character.id}`
+      const response = await fetch(url)
+      const data = await response.json()
+      setSpecie(
+        data.flavor_text_entries
+          .filter((y) => y.language.name === 'es')
+          .map((e) => e)
+      )
+    } catch (e) {
+      alert('Mensaje del Servidor: No se pudo establecer la conexión')
+    }
   }
 
   return (
