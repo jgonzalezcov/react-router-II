@@ -13,7 +13,6 @@ const Select = () => {
   const sendForm = (e) => {
     e.preventDefault()
     navigate(`/pokemones/${character}`)
-    console.log(character)
     setActivebtn(false)
     setCharacter('')
   }
@@ -42,7 +41,6 @@ const Select = () => {
 
   return (
     <div className="container-select">
-      {console.log(listName)}
       <div className="container-form">
         <h3 className="title-input">Encuentra tu POKÉMON</h3>
 
