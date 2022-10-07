@@ -13,7 +13,6 @@ const Select = () => {
   const sendForm = (e) => {
     e.preventDefault()
     navigate(`/pokemones/${character}`)
-    console.log(character)
     setActivebtn(false)
     setCharacter('')
   }
@@ -28,12 +27,20 @@ const Select = () => {
       setActivebtn(false)
     }
   }
+  function compare_name(a, b) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1
+    }
+    return 0
+  }
 
   const { listName } = React.useContext(DataContext)
 
   return (
     <div className="container-select">
-      {console.log(listName)}
       <div className="container-form">
         <h3 className="title-input">Encuentra tu POKÉMON</h3>
 
@@ -58,6 +65,7 @@ const Select = () => {
                       .filter((y) =>
                         y.name.toUpperCase().includes(character.toUpperCase())
                       )
+                      .sort(compare_name)
                       .map((pokemon) => (
                         <li
                           key={pokemon.name}
