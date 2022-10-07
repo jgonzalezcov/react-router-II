@@ -10,7 +10,9 @@ const Characters = () => {
   const { name } = useParams()
 
   useEffect(() => {
-    jsonData()
+    if (name) {
+      jsonData()
+    }
   }, [name])
 
   const jsonData = async () => {
@@ -23,31 +25,30 @@ const Characters = () => {
       alert('Mensaje del Servidor: No se pudo establecer la conexión')
     }
   }
-
-  useEffect(() => {
-    if (character) {
-      jsonSp()
-    }
-  }, [character])
+  try {
+    useEffect(() => {
+      if (character) {
+        jsonSp()
+      }
+    }, [character])
+  } catch (e) {
+    alert('Mensaje del Servidor: No se pudo establecer la conexión')
+  }
 
   const jsonSp = async () => {
-    try {
-      const url = `https://pokeapi.co/api/v2/pokemon-species/${character.id}`
-      const response = await fetch(url)
-      const data = await response.json()
-      setSpecie(
-        data.flavor_text_entries
-          .filter((y) => y.language.name === 'es')
-          .map((e) => e)
-      )
-    } catch (e) {
-      alert('Mensaje del Servidor: No se pudo establecer la conexión')
-    }
+    const url = `https://pokeapi.co/api/v2/pokemon-species/${character.id}`
+    const response = await fetch(url)
+    const data = await response.json()
+
+    setSpecie(
+      data.flavor_text_entries
+        .filter((y) => y.language.name === 'es')
+        .map((e) => e)
+    )
   }
 
   return (
     <div className="container-page">
-      {console.log(specie)}
       <div className="character-view">
         {character ? (
           <div className="character-container">
